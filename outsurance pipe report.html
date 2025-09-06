@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OUTSURANCE Pipe Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    td {
+      border: 1px solid #000;
+      padding: 8px;
+      vertical-align: top;
+    }
+    input, textarea {
+      border: 1px solid #ccc;
+      width: 100%;
+      font-family: inherit;
+      font-size: 14px;
+      padding: 4px;
+      background: #fff;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: none;
+      overflow: hidden;
+      min-height: 20px;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        width: 210mm;   /* A4 width */
+        margin: 0 auto; /* center on page */
+      }
+      .buttons { display: none; }
+      input, textarea {
+        border: none;
+        padding: 0;
+        background: transparent;
+      }
+      table {
+        border: 1px solid #000;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>OUTSURANCE PIPE REPORT</h1>
+  <h2>PLUMBER WHO ATTENDED: <input type="text" name="plumber" title="Plumber Name" placeholder="Enter plumber name"></h2>
+
+  <table>
+  <tr><td>Type of repair – concealed/visible</td><td><input type="text" name="repairType" title="Type of repair" placeholder="Concealed or visible"></td></tr>
+  <tr><td>Position of leak – description of where the leak is</td><td><textarea name="position" oninput="autoResize(this)" title="Position of leak" placeholder="Describe where the leak is"></textarea></td></tr>
+  <tr><td>Type of pipe</td><td><input type="text" name="pipeType" title="Type of pipe" placeholder="e.g. Copper, PVC"></td></tr>
+  <tr><td>Is it hot or cold</td><td><input type="text" name="hotCold" title="Hot or Cold" placeholder="Hot or Cold"></td></tr>
+  <tr><td>Size of pipe</td><td><input type="text" name="pipeSize" title="Size of pipe" placeholder="e.g. 15mm"></td></tr>
+  <tr><td>Condition of pipe</td><td><textarea name="pipeCondition" oninput="autoResize(this)" title="Condition of pipe" placeholder="Describe condition"></textarea></td></tr>
+  <tr><td>Did you do any repairs</td><td><input type="text" name="repairs" title="Repairs done" placeholder="Yes or No"></td></tr>
+  <tr><td>Give a description of repairs done</td><td><textarea name="repairsDesc" oninput="autoResize(this)" title="Description of repairs" placeholder="Describe repairs done"></textarea></td></tr>
+  <tr><td>Give a breakdown of all materials used – pipe/fittings and quantity</td><td><textarea name="materials" oninput="autoResize(this)" title="Materials used" placeholder="List materials and quantity"></textarea></td></tr>
+  <tr><td>Was leak detection done</td><td><input type="text" name="leakDetection" title="Leak detection done" placeholder="Yes or No"></td></tr>
+  <tr><td>What type of leak detection was done</td><td><input type="text" name="leakType" title="Type of leak detection" placeholder="Describe type"></td></tr>
+  <tr><td>If concrete was broken – how many m²</td><td><input type="text" name="concrete" title="Concrete broken (m²)" placeholder="e.g. 2"></td></tr>
+  <tr><td>Did you use a jack hammer to break the concrete?</td><td><input type="text" name="jackHammer" title="Jack hammer used" placeholder="Yes or No"></td></tr>
+  <tr><td>Is there any other prep work – if yes provide a description</td><td><textarea name="prepWork" oninput="autoResize(this)" title="Other prep work" placeholder="Describe prep work"></textarea></td></tr>
+  <tr><td>Was there any resultant damages and if so advise where</td><td><textarea name="damages" oninput="autoResize(this)" title="Resultant damages" placeholder="Describe damages"></textarea></td></tr>
+  <tr><td>Was any tiles damaged</td><td><input type="text" name="tilesDamaged" title="Tiles damaged" placeholder="Yes or No"></td></tr>
+  <tr><td>Does the client have spare tiles or accept similar tiles</td><td><input type="text" name="spareTiles" title="Spare tiles or accept similar" placeholder="Yes or No"></td></tr>
+  <tr><td>Was any sanware removed to access leak?</td><td><input type="text" name="sanware" title="Sanware removed" placeholder="Yes or No"></td></tr>
+  <tr><td>If Sanware was removed, did it break?</td><td><input type="text" name="sanwareBreak" title="Sanware break" placeholder="Yes or No"></td></tr>
+  <tr><td>How many hours did the repair take?</td><td><input type="text" name="repairHours" title="Repair hours" placeholder="e.g. 2"></td></tr>
+  <tr><td>After repair done, was the meter standing still?</td><td><input type="text" name="meterStill" title="Meter standing still" placeholder="Yes or No"></td></tr>
+  <tr><td>If meter was still moving, is there another leak? If so, advise where</td><td><textarea name="secondLeak" oninput="autoResize(this)" title="Second leak location" placeholder="Describe location"></textarea></td></tr>
+  <tr><td>Would another leak detection be needed if there is a second leak?</td><td><input type="text" name="secondLeakDetection" title="Second leak detection needed" placeholder="Yes or No"></td></tr>
+  </table>
+
+  <div class="buttons">
+    <button onclick="window.print()">Print / Save as PDF</button>
+    <button onclick="document.querySelectorAll('input, textarea').forEach(el => el.value='')">Clear Form</button>
+  </div>
+
+  <script>
+    function autoResize(textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = (textarea.scrollHeight) + 'px';
+    }
+  </script>
+</body>
+</html>

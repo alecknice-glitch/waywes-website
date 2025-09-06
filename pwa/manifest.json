@@ -1,0 +1,20 @@
+{
+  "name": "WayWes Demo",
+  "short_name": "WayWes",
+  "start_url": "../waywes-demo.html",
+  "display": "standalone",
+  "background_color": "#f7f7f7",
+  "theme_color": "#1976d2",
+  "icons": [
+    {
+      "src": "../images/waywes-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "../images/waywes-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

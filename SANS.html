@@ -1,0 +1,488 @@
+<style>
+    .top-right-logos {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 8px;
+        z-index: 10;
+    }
+    .top-right-logos img {
+        max-width: 60px;
+        height: auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    </style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANS Compliance Notification Form</title>
+    <link rel="stylesheet" href="pwa/style.css">
+    <style>
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+        html, body {
+            width: auto;
+            /* min-height: auto; removed for compatibility */
+            max-width: 100vw;
+            max-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+        }
+        @media print {
+            html, body {
+                width: 210mm;
+                min-height: 297mm;
+                max-width: 210mm;
+                max-height: 297mm;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                box-sizing: border-box;
+            }
+            body {
+                margin: 6mm 0mm 6mm 10mm;
+            }
+        }
+        title {
+            font-size: 24px;
+            text-align: left;
+        }
+
+        h2, h3 {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+         .logo {
+            text-align: left;
+            margin-bottom: 5px;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .logo img {
+            max-width: 90px;
+            height: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            margin-top: 0;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 6px;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f2f2f2;
+        }
+
+        .checkbox {
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: auto;
+            padding: 1px;
+        }
+
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: auto;
+            /* Match column size to text */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            min-height: 1.5em;
+            box-sizing: border-box;
+            resize: none;
+            overflow-y: auto;
+        }
+
+        /* Use textarea for multiline fields */
+        textarea {
+            width: 100%;
+            min-height: 1.5em;
+            max-height: 6em;
+            box-sizing: border-box;
+            resize: vertical;
+            overflow-y: auto;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+        /* Make risk_address and other match single-line height by default */
+        #risk_address,
+        #other {
+            min-height: 1.5em;
+            max-height: 6em;
+            resize: vertical;
+            overflow-y: hidden;
+        }
+
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 2px 4px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        th#yes-col, th#no-col, th#na-col,
+        td.checkbox {
+            text-align: center;
+        }
+
+
+        .signature {
+                height: 90px;
+                width: 180px;
+                text-align: center;
+                vertical-align: middle;
+                padding: 0;
+        }
+        .signature img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(25,118,210,0.13);
+            background: #fff;
+            border: none;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* Auto-resizing single-line textarea */
+        .autoresize {
+            width: 98%;
+            min-height: 1.5em;
+            max-height: 6em;
+            box-sizing: content-box;
+            resize: none;
+            overflow-y: hidden;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+
+        .footer-contact {
+            width: 100%;
+            text-align: center;
+            font-size: 11px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                font-size: 15px;
+                margin: 4px;
+                padding: 0 2vw;
+            }
+            .top-right-logos img {
+                max-width: 40px;
+            }
+            table {
+                width: 100%;
+                font-size: 13px;
+                display: block;
+                overflow-x: auto;
+            }
+            th, td {
+                font-size: 13px;
+                padding: 6px 4px;
+                white-space: pre-line;
+            }
+            input[type="text"], input[type="date"], textarea {
+                font-size: 14px;
+                width: 98%;
+            }
+            .logo img {
+                max-width: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-right-logos">
+        <td>PIRB Reg 2316/10</td>
+        <img src="images/plumbing-industry.png" alt="Plumbing Industry Registration Board Logo">
+        <img src="images/iopsa.jpg" alt="IOPSA Logo">
+    </div>
+     <div class="logo">
+        <img src="images/waywes-plumbing-logo.jpeg" alt="waywes plumbing Logo">
+    </div>
+    <h2>SANS Compliance Notification</h2>
+    <h3>Revision (14/05/2025)</h3>
+    <table>
+        <tr>
+            <td>Licensed Plumber Name:</td>
+            <td colspan="3">Clive Van Niekerk</td>
+        </tr>
+        <tr>
+            <td>Trade Test Certificate Number:</td>
+            <td colspan="3">CETA/1/0158</td>
+        </tr>
+        <tr>
+            <td><label for="fogi_order">Fogi Order No:</label></td>
+            <td colspan="3"><textarea id="fogi_order" name="fogi_order" class="autoresize"></textarea></td>
+        </tr>
+        <tr >
+            <td><label for="policy_holder">Policy Holder Name:</label></td>
+            <td colspan="3"><textarea id="policy_holder" name="policy_holder" class="autoresize"></textarea></td>
+        </tr>
+        <tr>
+            <td><label for="risk_address">Risk address:</label></td>
+            <td colspan="3"><textarea id="risk_address" name="risk_address"></textarea></td>
+        </tr>
+       
+   
+        <tr>
+            <th></th>
+            <th colspan="3">Tick relevant box</th>
+        </tr>
+        <tr>
+            <td>Installation-Electric Hot Water System</td>
+            <td>SANS 10254</td>
+            <td colspan="3" class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+
+        </tr>
+        <tr>
+            <td>Installation-Solar Hot Water System</td>
+            <td>SANS 10106</td>
+            <td colspan="3" class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+        </tr>
+        <tr>
+            <td>Installation-Heat Pump</td>
+            <td>SANS 1352</td>
+            <td colspan="3" class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+
+        </tr>
+   
+        <tr>
+            <td><label for="manufacturer">Manufacturer:</label></td>
+            <td colspan="3"><textarea id="manufacturer" name="manufacturer" class="autoresize"></textarea></td>
+        </tr>
+        <tr>
+            <td><label for="size">Size / Capacity:</label></td>
+            <td colspan="3"><textarea id="size" name="size" class="autoresize"></textarea></td>
+        </tr>
+        <tr>
+            <td><label for="serial_number">Serial Number:</label></td>
+            <td colspan="3"><textarea id="serial_number" name="serial_number" class="autoresize"></textarea></td>
+        </tr>
+   
+        <tr>
+            <th>CHECKLIST TO STANDARD</th>
+            <th id="yes-col">YES</th>
+            <th id="no-col">NO</th>
+            <th id="na-col">N/A</th>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Isolating valve</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Pressure reducing valve / expansion relief including overflow</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>System balanced</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Anti-Syphon loop present</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Cold water vacuum breaker</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Hot water vacuum breaker</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Safety, TP including overflow as prescribed</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Drip tray including overflow</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Structural supports</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Pipe and overflow support / affixations</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Earthing and bonding</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Electrical isolator</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>R1 thermal lagging</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <th colspan="1"></th>
+            <th id="yes-col">YES</th>
+            <th id="no-col">NO</th>
+            <th id="na-col">N/A</th>
+        </tr>
+   
+
+    <th colspan="4">Notification of Pre-Existing Non-Compliance associated to not critical safety issue:</th>
+   
+        <tr>
+            <td>Is System balanced?</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Is Electrical isolator installed?</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td>Is R1 thermal lagging installed on all hot-water service pipes?</td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="yes-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="no-col"></td>
+            <td class="checkbox"><input type="checkbox" aria-labelledby="na-col"></td>
+        </tr>
+        <tr>
+            <td><label for="other">Other:</label></td>
+            <td colspan="3"><textarea id="other" name="other"></textarea></td>
+        </tr>
+
+    <tr>
+        <td colspan="4">I hereby confirm that the above work was carried out by me or under my adequate supervision.</td></tr>
+    
+        <tr>
+            <td><label for="date">Date:</label></td>
+            <td colspan="3"><input type="date" id="date" name="date"></td>
+        </tr>
+        <tr>
+            <td>Signature:</td>
+            <td colspan="3" class="signature"><img src="images/signature.jpeg" alt="Signature"></td>
+        </tr>
+    </table>
+    <div class="buttons">
+      <button type="button" onclick="window.print()">Print / Save as PDF</button>
+      <button type="button" onclick="saveForm()">Save</button>
+    </div>
+    <p>NOTE:This document serves as a notice in respect of the status of the plumbing works carried out on this occasion.</p>
+    <script>
+    // Auto-resize textarea vertically, single-line until overflow
+    document.querySelectorAll('textarea').forEach(function(textarea) {
+        textarea.setAttribute('rows', 1);
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+    });
+    function saveForm() {
+      const data = {};
+      document.querySelectorAll('input, textarea, select').forEach(el => {
+        if (el.type === 'checkbox') {
+          data[el.name || el.id] = el.checked;
+        } else {
+          data[el.name || el.id] = el.value;
+        }
+      });
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'SANS_form_data.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+    </script>
+</body>
+
+<footer class="footer-contact">
+    Trend Int Home Builders pty Ltd t/a WayWes PlumbingSevices.
+    • Unity 2, Pro Dev Park, Capricorn Business Park, Muizenrg, 7945<br>
+    • Office: 021 788 2348
+    • Fax: 086 512 1879
+    • Cell: 083 700 8260
+    • e-mail: waywesplumbing@mweb.co.za
+</footer>
+
+</html>
