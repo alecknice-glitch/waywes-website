@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang ="en">   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipe Report</title>
+    
+                <style>
+                /* Responsive styles for mobile */
+                @media (max-width: 700px) {
+                    body {
+                        font-size: 14px;
+                        margin: 4px;
+                    }
+                    .logo img {
+                        width: 100%;
+                        max-width: 300px;
+                        height: auto;
+                    }
+                    table {
+                        width: 100%;
+                        min-width: 400px;
+                        font-size: 13px;
+                        display: block;
+                        overflow-x: auto;
+                        margin-bottom: 16px;
+                    }
+                    th, td {
+                        font-size: 13px;
+                        padding: 6px 4px;
+                        white-space: pre-line;
+                    }
+                    .section-title, .subhead {
+                        font-size: 14px;
+                    }
+                    input[type="text"], input[type="number"], textarea {
+                        font-size: 14px;
+                    }
+                }
+               body { font-family: Arial, sans-serif; margin: 10px; }
+        h2 { text-align: center; }
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+                th, td {
+                    border: 1px solid #000;
+                    padding: 2px 4px;
+                    font-size: 12px;
+                }
+                        @media print {
+                                        html, body {
+                                            width: 100%;
+                                            height: 100%;
+                                            margin: 5mm 0 5mm 0mm;
+                                            padding: 0;
+                                            font-size: 12px;
+                                            font-family: Arial, sans-serif;
+                                        }
+                                        table {
+                                            border-collapse: collapse;
+                                            width: auto;
+                                            min-width: 0;
+                                            max-width: 100vw;
+                                            margin-left: 0 !important;
+                                            margin-right: auto !important;
+                                            margin-bottom: 10px;
+                                            border: 1px solid #000;
+                                        }
+                            th, td {
+                                border: 1px solid #000;
+                                padding: 2px 4px;
+                                font-size: 12px;
+                                background: inherit;
+                                color: inherit;
+                            }
+                            .section-title { background: #e0e0e0; }
+                            .subhead { background: #f9f9f9; }
+                            .cell-resizer {
+                                display: none !important;
+                            }
+                        }
+        th { background: #f2f2f2; }
+    .section-title { background: #e0e0e0; font-weight: bold; text-align: left; padding: 2px; }
+    .align-left { text-align: left; }
+    .align-center { text-align: center; }
+        .subhead { background: #f9f9f9; font-weight: bold; text-align: center; }
+                input[type="text"], input[type="number"] { width: 99%; }
+                textarea {
+                    width: 100%;
+                    min-height: 20px;
+                    height: 100%;
+                    box-sizing: border-box;
+                    display: block;
+                }
+        label { margin-right: 5px; }
+         th {
+      text-align: left; /* Aligns text to the left*/
+    }
+     td {
+      text-align: center; /* Aligns text to the center */
+    }
+     textarea {
+      resize: none;
+      overflow: hidden;
+      min-height: 20px;}
+
+    
+      .buttons { display: none; }
+      input, textarea {
+        border: none;
+        padding: 0;
+        background: transparent;
+      }
+      table {
+        border: 1px solid #000;
+      }
+    
+                .sr-only {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0,0,0,0);
+                    border: 0;
+                }
+                input::placeholder, textarea::placeholder {
+                    color: transparent;
+                }
+                </style>
+    </head>
+<body>
+    <div class="logo">
+        <img src="c:\Users\Workgroup\OneDrive\Desktop\SANS\images\Digicall-logo.png" width="150mm" alt="Digicall Logo">
+        <P>FOGI PLUMBING SOLUTIONS</P>
+    </div>
+
+        <table >
+            <tr>
+                <td></td><td colspan="9" class="align-left">EPC Report (P3)-Revisionn09.2023</td>
+            </tr>
+            <tr>
+                <td></td><th colspan="9" class="section-title">Pipe Repairs</th>
+            </tr>
+            <tr>
+                <td></td><td></td><th colspan="4">Concealed</th><th colspan="4">Visible</th>
+            </tr>
+            <tr>
+                <th>1</th><th>Type of Repair?</th>
+                <td><label><input type="checkbox" name="brickwork">In brickwork</label></td>
+                <td><label><input type="checkbox" name="brickwork_corroded">brickwork corroded</label></td>
+                <td><label><input type="checkbox" name="earth">In earth</label></td>
+                <td><label><input type="checkbox" name="earth_corroded">earth corroded</label></td>
+                <td><label><input type="checkbox" name="concrete">In concrete</label></td>
+                <td><label><input type="checkbox" name="concrete_corroded">concrete corroded</label></td>
+                <td><label><input type="checkbox" name="visible">Visible</label></td>
+                <td><label><input type="checkbox" name="visible_corroded">Visible Corroded</label></td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <th colspan="5">Is it a reoccurring leak?</th>
+                <td colspan="2"><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td colspan="2"><label><input type="checkbox" name="No" >No</label></td>
+
+            </tr>
+            <tr>
+                <th>3</th>
+                <th>Type of pipe?</th>
+                <td colspan="2"><label><input type="checkbox" name="Galvanized">Galvanized</label></td>
+                <td><label><input type="checkbox" name="Multi layer">Multi layer</label></td>
+                <td><label><input type="checkbox" name="plastic">Plastic</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Polymer">Polymer</label></td>
+                <td colspan="2" ><label><input type="checkbox" name="Copper">Copper</label></td>
+
+            </tr>
+            <tr>
+                <th>4</th>
+                <th colspan="3" >Size of pipe?</th>
+                <td colspan="2"><label><input type="checkbox" name="15-17">15-17</label></td>
+                <td><label><input type="checkbox" name="20-25">20-25</label></td>
+                <td colspan="2"><label><input type="checkbox" name="28-35">28-35</label></td>
+                <td colspan="1"><label><input type="checkbox" name="40-50">40-50</label></td>
+
+            </tr>
+            <tr>
+                <th>5</th>
+                <th colspan="5">where is the failure?</th>
+                <td colspan="4"></td>
+
+            </tr>
+            <tr>
+                <th></th>
+                <th colspan="5" class="align-center">Inside</th>
+                <td colspan="4" class="align-left">
+                    <label><input type="checkbox" name="Bathroom">Bathroom</label>
+                    <label><input type="checkbox" name="Bedroom">Bedroom</label>
+                    <label><input type="checkbox" name="Cupboard">Cupboard</label>
+                    <label><input type="checkbox" name="Dining ROOM">Dining Room</label>
+                    <label><input type="checkbox" name="Garage">Garage</label>
+                    <label><input type="checkbox" name="Kitchen">Kitchen</label>
+                    <label><input type="checkbox" name="Lounge">Lounge</label>                    
+                    <label><input type="checkbox" name="Passage">Passage</label>
+                    <label><input type="checkbox" name="Quarters">Quarters</label>
+                    <label><input type="checkbox" name="Laundry">Laundry</label><br>
+                    <label><input type="checkbox" name="Scullery">Scullery</label>
+                    <label><input type="checkbox" name="Study">Study</label>
+                    <label><input type="checkbox" name="Toilet">Toilet</label>
+                    <label><input type="checkbox" name="Understairs">Understairs</label>
+                    <label><input type="checkbox" name="Maids">Maids</label>
+                    <label><input type="checkbox" name="Entertainment Area"> Entertainment Area</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <th colspan="5" class="align-center">Inside</th>
+                <td colspan="4" class="align-center">
+                    <label><input type="checkbox" name="At basin">At basin</label>
+                    <label><input type="checkbox" name="At bath">At bath</label>
+                    <label><input type="checkbox" name="At shower">At shower</label> 
+                    <label><input type="checkbox" name="At toilet">At toilet</label>
+                    <label><input type="checkbox" name="At sink">At sink</label>
+                    <label><input type="checkbox" name="wall">wall</label>
+                    <label><input type="checkbox" name="Ceiling">Ceiling</label>
+                    <label><input type="checkbox" name="On Roof">On Roof</label>
+                </td>
+            </tr>
+
+            <tr>
+                <th></th>
+                <th colspan="5" class="align-center">Outside</th>
+                <td colspan="4">
+                    <label><input type="checkbox" name="Garden">Garden</label>
+                    <label><input type="checkbox" name="Driveway">Driveway</label>
+                    <label><input type="checkbox" name="Paved Area">Paved Area</label>
+                    <label><input type="checkbox" name="walkway">walkway</label>
+                    <label><input type="checkbox" name="Exterior wall">Exterior wall</label>
+                    <label><input type="checkbox" name="on Roof">on Roof</label>
+                </td>
+            </tr>
+
+            <tr>
+                <th>6</th>
+                <th colspan="5">How Repaired?</th>
+                <td colspan="1"><label><input type="checkbox" name="Repair">Repair</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Join-Join">Join-Join</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Reroute">Rereout</label></td>
+                </tr>
+
+            <tr>
+                <th>7</th>
+                <th colspan="5">was the failure on the hot or cold-water pipe?</th>
+                <td colspan="2"><label><input type="checkbox" name="HOT">HOT</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Cold">Cold</label></td>
+            </tr>
+
+            <tr>
+                <th>8</th>
+                <th colspan="5">Probable cause of the failure</th>
+                <td colspan="1"><label><input type="checkbox" name="Freeze">Freeze</label></td>
+                <td colspan="1"><label><input type="checkbox" name="corroded/pitted">corroded/pitted</label></td>
+                <td colspan="2"><label><input type="checkbox" name="bursting/leaking overflowing">bursting/leeaking overflowing</label></td>
+            </tr>
+
+            <tr>
+                <th>9</th>
+                <th colspan="5">condition of piping surrounding the point of failure</th>
+                <td colspan="1"><label><input type="checkbox" name="Good">Good</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Fair">Fair</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Poor">Poor</label></td>
+            </tr>
+
+            <tr>
+                <th>10</th>
+                <th colspan="5">if tiles were damaged gain access?</th>
+                <td colspan="1"><label><input type="checkbox" name="Clint has tiles">Clint has tiles</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Clint accepts similar tiles">Clint accepts similar tiles</label></td>
+                <td colspan="2"><label><input type="checkbox" name="No tiles needed">No tiles needed</label></td>
+            </tr>
+            
+            <tr>
+                <th>11</th>
+                <th colspan="5">was there Resultant Damages caused by the failure?</th>
+                <td colspan="3"><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td colspan="3"><label><input type="checkbox" name="No">No</label></td>
+            </tr>
+
+            <tr>
+                <th>12</th>
+                <th colspan="5">Does a prep Contractor need to be appointed to effect repairs to the access creared you?</th>
+                <td colspan="3"><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td colspan="3"><label><input type="checkbox" name="No">No</label></td>
+            </tr>
+
+            <tr>
+                <th>13</th>
+                <th colspan="5">Brief description of the damage that you created to aaffect the repair?</th>
+                <td colspan="6"><label for="desc_damage" class="sr-only">Brief description of the damage:</label><textarea id="desc_damage" name="text" rows="1" oninput="autoExpand(this)" title="Brief description of the damage" placeholder="Enter description"></textarea></td>
+                
+                </tr>  
+        </table>
+        <table>
+            
+            <tr>
+                <td></td>
+                <th colspan="11">Drain Repairs</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <th colspan="4">Type of Repair?</th>
+                <td colspan="1"><label><input type="checkbox" name="Storm water">Storm Water</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Basin Outlet">Basin Outlet</label></td>
+                <td><label><input type="checkbox" name="Toilet Outlet">Toilet Outlet/Flush pipe</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Shower Outlet">Shower Outlet</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Bath Outlet">Bath Outlet</label></td>
+            </tr>
+            <tr>
+                <th></th>
+                <th colspan="3"></th>
+                <td colspan="2"><label><input type="checkbox" name="Blockage with Open">Blockage with Open</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Blockage without Open">Blockage without open</label></td>
+                <td><label><input type="checkbox" name="Sewer/Waste with Open">Sewer/Waste with Open</label></td>
+                <td colspan="3"><label><input type="checkbox" name="sewer/waste without Open">Sewer/waste without open</label></td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <th colspan="7">Is it a reoccurring blockage/leak?</th>
+                <td colspan="1"><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td colspan="2"><label><input type="checkbox" name="No">No</label></td>
+        
+            </tr>
+            <tr>
+                <th>3</th>
+                <th colspan="7">What caused the failure?</th>
+                <td colspan="1"><label><input type="checkbox" name="Broken/collapsed">Broken/collapsed</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Blockage">Blockage</label></td>
+        
+            </tr>
+            <tr>
+                <th rowspan="2">4</th>
+                <th colspan="4"; rowspan="2">Reason for blockage?</th>
+                <td><label><input type="checkbox" name="Cracking/collapsing building">Cracking/collapsing building</label></td>
+                <td><label><input type="checkbox" name="Defective workmanship/design">Defective workmanship/design</label></td>
+                <td><label><input type="checkbox" name="common HH blockage">common HH blockage</label></td>
+                <td ><label><input type="checkbox" name="Storm">Storm</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Malicious Damage">Malicious Damage</label></td>
+        
+            </tr>
+            <tr>
+                <td><label><input type="checkbox" name="Roots/Weeds">Roots/weeds</label></td>
+                <td><label><input type="checkbox" name="Vermin">Vermin</label></td>
+                <td></td>
+                <td></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <th>5</th>
+                <th colspan="4">Type of drain?</th>
+                <td><label><input type="checkbox" name="Standard (on client's property)">Standard (on client's property)</label></td>
+                <td><label><input type="checkbox" name="Septic Tank">Septic Tank</label></td>
+                <td><label><input type="checkbox" name="French">French</label></td>
+                <td><label><input type="checkbox" name="Municipal">Municipal</label></td>
+                <td colspan="2"></td>
+        
+            </tr>
+            <tr>
+                <th>6</th>
+                <th colspan="4">Type of pipe or joint?</th>
+                <td><label><input type="checkbox" name="Earthenware">Earthenware</label></td>
+                    <td><label><input type="checkbox" name="uPVC">uPVC</label></td>
+                    <td><label><input type="checkbox" name="Asbestos">Asbestos</label></td>
+                    <td><label><input type="checkbox" name="Cast iron">Cast iron</label></td>
+                    <td><label><input type="checkbox" name="Pitch Fibre">Pitch Fibre</label></td>
+                    <td><label><input type="checkbox" name="concrete">concrete</label></td>
+            
+            </tr>
+            
+            
+        
+            <tr>
+                <th>7</th>
+                <th colspan="4">Size of pipe or joint?</th>
+                <td><label><input type="checkbox" name="40">40</label></td>
+                <td><label><input type="checkbox" name="50">50</label></td>
+                <td><label><input type="checkbox" name="75">75</label></td>
+                <td><label><input type="checkbox" name="110">110</label></td>
+                <td><label><input type="checkbox" name="150">150</label></td>
+                <td><label><input type="checkbox" name="200 & above">200 & above </label></td>
+            </tr>
+        
+            <tr>
+                <th>8</th>
+                <th colspan="7">If tiles were damaged to gain access, does the client have spare tiles to reinstate the<br>repairs</th>
+                <td><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td><label><input type="checkbox" name="No">No</label></td>
+                <td><label><input type="checkbox" name="N/A">N/A</label></td>
+            </tr>
+        
+            <tr>
+                <th>9</th>
+                <th colspan="7">condition of piping surrounding the point of failure</th>
+                <td colspan="2"><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td colspan="2"><label><input type="checkbox" name="No">No</label></td>
+                
+            </tr>
+        
+            <tr>
+                <th>10</th>
+                <th colspan="7">Does Prep contractor need to be appointed to effect repairs to reinstate the repairs?</th>
+                <td colspan="2"><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td colspan="2"><label><input type="checkbox" name="No">No</label></td>
+               
+            </tr>
+        
+            <tr>
+                <th>11</th>
+                <th colspan="7">Was any form of Detection Done?</th>
+                <td colspan="2"><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td><label><input type="checkbox" name="No">No</label></td>
+            </tr>
+        
+            <tr>
+                <th>12</th>
+                <th colspan="7">Brief description of the Damages that you creared to affect the repair</th>
+                <td colspan="3"><label for="desc_drain_damage" class="sr-only">Brief description of the damages:</label><textarea id="desc_drain_damage" name="text" rows="1" oninput="autoExpand(this)" title="Brief description of the damages" placeholder="Enter description"></textarea></td>
+                
+            </tr>
+        </table>
+
+            <table>
+            <tr>
+                <td></td>
+                <th colspan="11">Sanitary Ware Repairs</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <th colspan="5">Item failed?</th>
+                <td colspan="1"><label><input type="checkbox" name="Cisten mechanism">Cisten mechanism</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Basin">Basin<br>pipe</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Shower base">Shower base</label></td>
+                <td colspan="2"><label><input type="checkbox" name="Terminal fitting">Terminal fitting</label></td>
+            </tr>
+            <tr>
+                <th></th>
+                <th colspan="5"></th>
+                <td colspan="2"><label><input type="checkbox" name="Low level toilet">Low level toilet</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Bidet">Bidet</label></td>
+                <td><label><input type="checkbox" name="Basin & Pedestal">Basin & Pedestal</label></td>
+                <td colspan="3"><label><input type="checkbox" name="sewer/waste without Open">Sink/prep Bowel</label></td>
+                
+            </tr>
+            <tr>
+                <th></th>
+                <th colspan="5"></th>
+                <td colspan="2"><label><input type="checkbox" name="Low level incl Cisten">Low level incl Cisten</label></td>
+                <td colspan="1"><label><input type="checkbox" name="Baths">Baths</label></td>
+                <td><label><input type="checkbox" name="close couple toilet"> close couple toilet</label></td>
+                <td colspan="3"><label><input type="checkbox" name="Cisten">Cisten</label></td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <th colspan="5">Where is the failure?</th> 
+                <td colspan="6"><label for="where_failure" class="sr-only">Location:</label><textarea id="where_failure" name="text" rows="1" oninput="autoExpand(this)" title="Location of failure" placeholder="Enter location"></textarea></td>
+            
+            </tr>
+            <tr>
+                <th>3</th>
+                <th colspan="8">Did the failure occur accidently?</th>
+                <td colspan="1"><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td colspan="2"><label><input type="checkbox" name="No">No</label></td>
+            
+            </tr>
+            <tr>
+                <th>4</th>
+                <th colspan="8">If tile were damaged to gain access, does the client have spare tiles to reinstate the repairs?</th>
+                <td><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td><label><input type="checkbox" name="No">No</label></td>
+                <td><label><input type="checkbox" name="N/A">N/A</label></td>
+            
+            </tr>
+         
+            <tr>
+                <th>5</th>
+                <th colspan="8">Was there Damages caused by the failure?</th>
+                <td><label><input type="checkbox" name="Yes">Yes</label>
+                </td>
+                <td colspan="2"><label><input type="checkbox" name="No">No</label></td>
+            
+            </tr>
+            <tr>
+                <th>6</th>
+                <th colspan="8">Does a prep contractor need to be appointed to effec repairs to the access created by you?</th>
+                <td><label><input type="checkbox" name="Yes">Yes</label></td>
+                <td colspan="2"><label for="no_checkbox">No</label><input type="checkbox" id="no_checkbox" name="No" title="No"></td>
+            
+            </tr>
+            
+            
+            
+            <tr>
+                <th>7</th>
+                <th colspan="8">Was any form of Detection Done</th>
+                <td><label><input type="checkbox" name="Yes">Yes</label>
+                </td>
+                <td colspan="2"><label><input type="checkbox" name="No">No</label></td>
+            
+            </tr>
+            <tr>
+                <th>8</th>
+                <th colspan="4">Brief description of the Damages that you created to affect the repair</th>
+                <td colspan="7"><label for="desc_sanitary_damage" class="sr-only">Brief description of the damages:</label><textarea id="desc_sanitary_damage" name="text" rows="1" oninput="autoExpand(this)" title="Brief description of the damages" placeholder="Enter description"></textarea></td>
+               
+            
+            </tr>
+        
+           
+        </table>
+
+    
+            <table>
+                <tr>
+                    
+                    <th colspan="12">Additional Notes</th>
+                </tr>
+                <tr>
+                    <th rowspan="2" >Did you do any repairs?</th>
+                    <td colspan="2"><label><input type="checkbox" name="Yes">Yes</label></td>
+                    <td colspan="1"><label><input type="checkbox" name="REpairs coverd">Repairs covered</label></td>
+                    <td colspan="1"><label><input type="checkbox" name="Repairs not coverd">Repairs not coverd</label></td>
+                    <td colspan="4"><label><input type="checkbox" name="Repairs less than excess">repairs less than excess</label></td>
+                </tr>
+                <tr>
+                
+                    
+                
+                    <td colspan="2"><label><input type="checkbox" name="No">No</label></td>
+                    <td colspan="1"><label><input type="checkbox" name="Repairs not coverd">Repairs not coverd</label></td>
+                    <td colspan="1"><label><input type="checkbox" name="cash settle/resons">cash settle/reson</label></td>
+                    <td colspan="2"><label><input type="checkbox" name="Not plumbing related">Not plumbing related</label></td>
+                    <td colspan="2"><label><input type="checkbox" name="other reason">other reason</label></td>
+
+                </tr>
+            
+                
+                <tr>
+            
+                    <th colspan="3">Was leak Detection  Done?</th> 
+                    <td><label><input type="checkbox" name="No">No</label></td>
+                    <td><label><input type="checkbox" name="Audio">Audio</label></td>
+                    <td><label><input type="checkbox" name="Gas">Gas</label></td>
+                    <td colspan="2"><label><input type="checkbox" name="Thermal">Thermal</label></td>
+                    <td><label><input type="checkbox" name="Dye">Dye</label></td>
+            
+                </tr>
+                <tr>
+                    
+                    <th colspan="7">was water meter moving?</th>
+                    <td><label><input type="checkbox" name="Yes">Yes</label></td>
+                    <td><label><input type="checkbox" name="No">No</label></td>
+            
+                </tr>
+                <tr>
+                    
+                    <th colspan="6">Were all water points checked before leak detection was done?</th>
+                    <td><label><input type="checkbox" name="Yes">Yes</label></td>
+                    <td><label><input type="checkbox" name="No">No</label></td>
+                    <td><label><input type="checkbox" name="N/A">N/A</label></td>
+            
+                </tr>
+            
+                <tr>
+                    
+                    <th colspan="7">Was there Damages caused by the failure?</th>
+                    <td><label><input type="checkbox" name="Yes">Yes</label>
+                    </td>
+                    <td><label><input type="checkbox" name="No">No</label></td>
+            
+                </tr>
+                <tr>
+                    
+                    <th colspan="4">If above,No: please supply a valid reason why the points were not checked firts?</th>
+                    <td colspan="6"><label for="reason_not_checked" class="sr-only">Reason not checked:</label><textarea id="reason_not_checked" name="text" rows="1" oninput="autoExpand(this)" title="Reason not checked" placeholder="Enter reason"></textarea></td>  
+            
+                </tr>
+                <tr>
+                    
+                    <th colspan="7">was income derived from client (excluding excess and firts call out (if applicable))?</th>
+                    <td><label><input type="checkbox" name="Yes">Yes></label></td>
+                    <td><label><input type="checkbox" name="No">No</label></td>
+
+                </tr>
+                <tr>
+                    
+                    <th colspan="6">Is th building being used for?</th>
+                    <td colspan="2"><label><input type="checkbox" name="Resdental">Resdental</label></td>
+                    <td colspan="2"><label><input type="checkbox" name="Business or Comercial">Business or Comercial</label></td>
+                </tr>
+                <tr>
+                    
+                    <th colspan="2">Comments:</th>
+                    <td colspan="7"><label for="comments" class="sr-only">Comments:</label><textarea id="comments" name="text" rows="1" oninput="autoExpand(this)" title="Comments" placeholder="Enter comments"></textarea></td>
+        </table>
+<script>
+function autoExpand(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+}
+document.querySelectorAll('textarea').forEach(function(textarea) {
+    textarea.addEventListener('input', function() { autoExpand(textarea); });
+});
+</script>
+</body>
+</html>

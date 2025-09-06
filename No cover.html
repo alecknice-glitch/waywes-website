@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>No Cover Instruction or ECG Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pwa/style.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .report-container { max-width: 900px; margin: auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+        .top-right-logos { display: flex; justify-content: flex-end; align-items: center; gap: 16px; margin-bottom: 12px; }
+        .top-right-logos img { height: 40px; }
+        h1 { font-size: 1.3em; margin-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
+        th, td { border: 1px solid #888; padding: 4px 6px; font-size: 0.95em; }
+        th { background: #f0f0f0; }
+        .section-title { background: #e0e0e0; font-weight: bold; text-align: left; padding: 6px; }
+        .input-cell { min-width: 80px; }
+        input[type="text"], input[type="number"] { width: 100%; box-sizing: border-box; border: 1px solid #bbb; border-radius: 3px; padding: 2px 4px; }
+        .notes { width: 100%; min-height: 40px; }
+        @media print {
+            body { margin: 0; }
+            .report-container { box-shadow: none; border-radius: 0; }
+            .top-right-logos img { height: 30px; }
+        }
+    </style>
+</head>
+<body>
+<div class="report-container">
+    <div class="top-right-logos">
+        <img src="images/Digicall-logo.png" alt="Digicall Logo">
+        <img src="images/plumbing indusrtry.png" alt="Fogi Plumbing Solutions">
+    </div>
+    <h1>No Cover Instruction or ECG Report (3.1) – Revision (09/2020)</h1>
+    <form>
+        <table>
+            <tr><th>Date</th><td class="input-cell"><input type="date" name="date" title="Date" placeholder="Date"></td><th>Ord No:</th><td class="input-cell"><input type="text" name="ord_no" title="Order Number" placeholder="Order Number"></td><th>Claim No:</th><td class="input-cell"><input type="text" name="claim_no" title="Claim Number" placeholder="Claim Number"></td><th>Claim Name:</th><td class="input-cell"><input type="text" name="claim_name" title="Claim Name" placeholder="Claim Name"></td></tr>
+        </table>
+        <div class="section-title">1. Electric Geyser Details</div>
+        <table>
+            <tr><th>Manufacturer & Brand</th><td colspan="2"><input type="text" name="eg_manufacturer" title="Manufacturer & Brand" placeholder="Manufacturer & Brand"></td><th>Size</th><td colspan="4">
+                <select name="eg_size" title="Size">
+                    <option>50</option><option>100</option><option>150</option><option>200</option><option>250</option><option>Other</option>
+                </select>
+            </td></tr>
+            <tr><th>Code</th><td><input type="text" name="eg_code" title="Code" placeholder="Code"></td><th>Serial</th><td><input type="text" name="eg_serial" title="Serial" placeholder="Serial"></td><th>Gravity</th><td><input type="checkbox" name="eg_gravity" title="Gravity"></td></tr>
+            <tr><th>Record Date (see Annex AS)</th><td><input type="date" name="eg_record_date" title="Record Date" placeholder="Record Date"></td><th>Geyser Pressure rating (kPa)</th><td colspan="2"><input type="number" name="eg_pressure" title="Geyser Pressure rating (kPa)" placeholder="Pressure (kPa)"></td><th>Geyser Position Installed</th><td colspan="2"><input type="text" name="eg_position" title="Geyser Position Installed" placeholder="Position Installed"></td></tr>
+            <tr><th>Is the electric Geyser installed to SANS 10254?</th><td colspan="7"><input type="checkbox" name="eg_sans10254" title="Installed to SANS 10254"> Yes</td></tr>
+        </table>
+        <div class="section-title">2. Heat Pump Details</div>
+        <table>
+            <tr><th>Manufacturer & Brand</th><td><input type="text" name="hp_manufacturer" title="Manufacturer & Brand" placeholder="Manufacturer & Brand"></td><th>Code</th><td><input type="text" name="hp_code" title="Code" placeholder="Code"></td><th>Serial</th><td><input type="text" name="hp_serial" title="Serial" placeholder="Serial"></td></tr>
+            <tr><th>Output in kW</th><td><input type="number" name="hp_output" title="Output in kW" placeholder="Output in kW"></td><th>Type of Heat Pump</th><td colspan="3"><input type="text" name="hp_type" title="Type of Heat Pump" placeholder="Type of Heat Pump"></td></tr>
+            <tr><th>Is Heat Pump installed to SANS 1352?</th><td colspan="5"><input type="checkbox" name="hp_sans1352" title="Installed to SANS 1352"> Yes</td></tr>
+        </table>
+        <div class="section-title">3. Solar System Details</div>
+        <table>
+            <tr><th>Manufacturer & Brand</th><td><input type="text" name="solar_manufacturer" title="Manufacturer & Brand" placeholder="Manufacturer & Brand"></td><th>Size</th><td>
+                <select name="solar_size" title="Size">
+                    <option>50</option><option>100</option><option>150</option><option>200</option><option>250</option><option>Other</option>
+                </select>
+            </td><th>Serial</th><td><input type="text" name="solar_serial" title="Serial" placeholder="Serial"></td></tr>
+            <tr><th>Solar Geyser Code & Serial No</th><td colspan="2"><input type="text" name="solar_code_serial" title="Solar Geyser Code & Serial No" placeholder="Code & Serial No"></td><th>Record Date (see Annex H)</th><td colspan="2"><input type="date" name="solar_record_date" title="Record Date" placeholder="Record Date"></td></tr>
+            <tr><th>System Pressure rating (kPa)</th><td><input type="number" name="solar_pressure" title="System Pressure rating (kPa)" placeholder="Pressure (kPa)"></td><th>System Position Installed</th><td><input type="text" name="solar_position" title="System Position Installed" placeholder="Position Installed"></td></tr>
+            <tr><th>Collector Manufacturer</th><td><input type="text" name="collector_manufacturer" title="Collector Manufacturer" placeholder="Collector Manufacturer"></td><th>Collector Type</th><td>
+                <select name="collector_type" title="Collector Type">
+                    <option>Evacuated tube</option><option>Manifold</option><option>Flat Plate</option><option>Tubes</option>
+                </select>
+            </td></tr>
+            <tr><th>Qty of manifolds and tubes/manifold</th><td><input type="number" name="qty_manifolds" title="Qty of manifolds and tubes/manifold" placeholder="Quantity"></td><th>Size</th><td><input type="text" name="collector_size" title="Size" placeholder="Size"></td></tr>
+            <tr><th>Specify exact position of the solar geyser</th><td colspan="3"><input type="text" name="solar_exact_position" title="Exact Position" placeholder="Exact Position"></td></tr>
+            <tr><th>Is Solar system installed to SANS 10106?</th><td colspan="3"><input type="checkbox" name="solar_sans10106" title="Installed to SANS 10106"> Yes</td></tr>
+            <tr><th>Is the building being used for any business or commercial purpose?</th><td colspan="3"><input type="checkbox" name="building_commercial" title="Business or Commercial Purpose"> Yes</td></tr>
+            <tr><th>Is the shut off / isolating device fitted between geyser and PRV</th><td colspan="3"><input type="checkbox" name="isolating_device" title="Isolating Device"> Yes</td></tr>
+        </table>
+        <div class="section-title">4. General Information</div>
+        <table>
+            <tr><th>Resultant damaged caused by the</th><td><input type="text" name="resultant_damage" title="Resultant Damage" placeholder="Resultant Damage"></td><th>Resultant & Carpet</th><td><input type="text" name="resultant_carpet" title="Resultant & Carpet" placeholder="Resultant & Carpet"></td></tr>
+            <tr><th>What is the overall condition of the roof?</th><td>
+                <select name="roof_condition" title="Roof Condition">
+                    <option>Good</option><option>Fair</option><option>Poor</option>
+                </select>
+            </td><th>What is the overall condition of the geyser?</th><td>
+                <select name="geyser_condition" title="Geyser Condition">
+                    <option>Good</option><option>Fair</option><option>Poor</option>
+                </select>
+            </td></tr>
+            <tr><th>How many operative geysers installed on the roof?</th><td><input type="number" name="operative_geysers" title="Operative Geysers" placeholder="Number"></td><th>Is the geyser connected to another device?</th><td><input type="text" name="connected_device" title="Connected Device" placeholder="Connected Device"></td></tr>
+            <tr><th>Is System balanced?</th><td colspan="3"><input type="checkbox" name="system_balanced" title="System Balanced"> Yes</td></tr>
+            <tr><th>What make PRV is installed?</th><td><input type="text" name="prv_make" title="PRV Make" placeholder="PRV Make"></td><th>Old kPa</th><td><input type="number" name="prv_old_kpa" title="Old kPa" placeholder="Old kPa"></td><th>New kPa</th><td><input type="number" name="prv_new_kpa" title="New kPa" placeholder="New kPa"></td></tr>
+        </table>
+        <div class="section-title">5. Type of Failure</div>
+        <table>
+            <tr><th>Components</th><td colspan="5"><input type="text" name="failure_components" title="Components" placeholder="Components"></td></tr>
+            <tr><th>Overflows</th><td colspan="5"><input type="text" name="failure_overflows" title="Overflows" placeholder="Overflows"></td></tr>
+            <tr><th>Valves</th><td colspan="5"><input type="text" name="failure_valves" title="Valves" placeholder="Valves"></td></tr>
+            <tr><th>Warranty</th><td colspan="5"><input type="text" name="failure_warranty" title="Warranty" placeholder="Warranty"></td></tr>
+            <tr><th>Other than plumbing</th><td colspan="5"><input type="text" name="failure_other" title="Other than plumbing" placeholder="Other than plumbing"></td></tr>
+        </table>
+        <div class="section-title">6. Additional Notes</div>
+        <table>
+            <tr><th>Did you do any repairs?</th><td><input type="checkbox" name="repairs_yes" title="Repairs Yes"> Yes</td><td><input type="checkbox" name="repairs_no" title="Repairs No"> No</td></tr>
+            <tr><th>Excess lapsed</th><td><input type="checkbox" name="excess_lapsed" title="Excess Lapsed"> Yes</td><td><input type="checkbox" name="excess_not_lapsed" title="Excess Not Lapsed"> No</td></tr>
+            <tr><th>Did you derive income?</th><td><input type="checkbox" name="income_yes" title="Income Yes"> Yes</td><td><input type="checkbox" name="income_no" title="Income No"> No</td></tr>
+            <tr><th>Did you cause accidental?</th><td><input type="checkbox" name="accidental_yes" title="Accidental Yes"> Yes</td><td><input type="checkbox" name="accidental_no" title="Accidental No"> No</td></tr>
+            <tr><th>Other Comments</th><td colspan="2"><textarea class="notes" name="other_comments" title="Other Comments" placeholder="Other Comments"></textarea></td></tr>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

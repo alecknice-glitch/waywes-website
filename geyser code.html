@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geyser Serial/Code Decoder</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        label, input, select, button { font-size: 1em; }
+        #result { margin-top: 1.5em; padding: 1em; border: 1px solid #ccc; background: #f9f9f9; }
+        .brand-select { margin-bottom: 1em; }
+    </style>
+</head>
+<body>
+    <h2>Geyser Serial/Code Decoder</h2>
+    <form id="decoderForm" autocomplete="off">
+        <div class="brand-select">
+            <label for="brand">Brand:</label>
+            <select id="brand" name="brand">
+                <option value="kwikot">Kwikot</option>
+                <option value="tecron">Tecron</option>
+                <option value="supahot">Supahot</option>
+                <option value="duratherm">Duratherm</option>
+                <option value="gap">GAP</option>
+                <option value="ariston">Ariston</option>
+            </select>
+        </div>
+        <label for="serial">Serial/Code:</label>
+        <input type="text" id="serial" name="serial" required>
+        <button type="submit">Decode</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        // --- Flexible helpers for all brands ---
+        function calculateAge(year, month) {
+            if (!year || isNaN(year)) return '';
+            const now = new Date();
+            let age = now.getFullYear() - year;
+            if (month && !isNaN(month)) {
+                if (now.getMonth() + 1 < month) age--;
+            }
+            return age >= 0 ? age : 0;
+        }
+        function formatKwikotInput(input) {
+            // Try to format as MM-Y-5 or MM-Y-05
+            let s = input.replace(/[^A-Za-z0-9]/g, '');
+            let m = s.match(/^(\d{2})([A-Z])(\d{1,2})$/i);
+            if (m) {
+                return `${m[1]}-${m[2]}-${m[3]}`;
+            }
+            return input;
+        }
+        function kwikotDecode(serial) {
+            let s = serial.replace(/[^A-Za-z0-9]/g, '');
+            if (/^[A-Za-z]/.test(s)) s = s.slice(1);
+            const yearMap = {
+                I: 2005, J: 2006, K: 2007, L: 2008, M: 2009,N: 2010,P: 2011, Q: 2012, R: 2013, S: 2014, T: 2015, U: 2016, V: 2017, W: 2018, X: 2019,
+                Y: 2020, Z: 2021, A: 2022, B: 2023, C: 2024, D: 2025
+            };
+            let match = s.match(/^(\d{2})([A-Z])(\d)$/i);
+            if (match) {
+                let month = parseInt(match[1],10);
+                let yearCode = match[2].toUpperCase();
+                let warranty = parseInt(match[3], 10);
+                let year = yearMap[yearCode] || 'Unknown';
+                let age = calculateAge(year, month);
+                return `<b>Month:</b> ${month} <b>Year:</b> ${year} <b>Warranty:</b> ${warranty} year${warranty === 1 ? '' : 's'} (${warranty}) <b>Age:</b> ${age} year${age === 1 ? '' : 's'} (${age})`;
+            }
+            let m2 = s.match(/^(\d{2})(\d{2})(\d{2})$/);
+            if (m2) {
+                let month = parseInt(m2[1],10);
+                let year = 2000 + parseInt(m2[2],10);
+                let warranty = parseInt(m2[3], 10);
+                let age = calculateAge(year, month);
+                return `<b>Month:</b> ${month} <b>Year:</b> ${year} <b>Warranty:</b> ${warranty} year${warranty === 1 ? '' : 's'} (${warranty}) <b>Age:</b> ${age} year${age === 1 ? '' : 's'} (${age})`;
+            }
+            let m3 = s.match(/^(\d{2})([A-Z])(\d{2,})$/i);
+            if (m3) {
+                let month = parseInt(m3[1],10);
+                let yearCode = m3[2].toUpperCase();
+                let warranty = parseInt(m3[3], 10);
+                let year = yearMap[yearCode] || 'Unknown';
+                let age = calculateAge(year, month);
+                return `<b>Month:</b> ${month} <b>Year:</b> ${year} <b>Warranty:</b> ${warranty} year${warranty === 1 ? '' : 's'} (${warranty}) <b>Age:</b> ${age} year${age === 1 ? '' : 's'} (${age})`;
+            }
+            return 'Format not recognized. Please check the code.';
+        }
+        function tecronDecode(serial) {
+            // Try 4 digit year+month: 9905 = 1999 May
+            let m = serial.match(/(\d{2})(\d{2})/);
+            if (m) {
+                let year = parseInt(m[1],10);
+                year = (year < 50) ? 2000 + year : 1900 + year;
+                let month = parseInt(m[2],10);
+                let age = calculateAge(year, month);
+                return `<b>Year:</b> ${year} <b>Month:</b> ${month} <b>Age:</b> ${age} year${age === 1 ? '' : 's'} (${age})`;
+            }
+            // Try letter+2 digits: K09 = 2011 September
+            let m2 = serial.match(/([A-Z])(\d{2})/i);
+            if (m2) {
+                const yearMap = {D: 200, E: 2005, F: 2006, G: 2007, H: 2008, I:2009, J:2010, K:2011, L:2012, M:2013, N:2014, O:2015, P:2016, Q:2017, R:2018, S:2019, T:2020, U:2021, V:2022, W:2023, X:2024, Y:2025, Z:2026 };
+                const monthMap = { '01':'January','02':'February','03':'March','04':'April','05':'May','06':'June','07':'July','08':'August','09':'September','10':'October','11':'November','12':'December' };
+                let year = yearMap[m2[1].toUpperCase()];
+                let monthNum = parseInt(m2[2],10);
+                let month = monthMap[m2[2]] || m2[2];
+                let age = calculateAge(year, monthNum);
+                return `<b>Year:</b> ${year} <b>Month:</b> ${month} <b>Age:</b> ${age} year${age === 1 ? '' : 's'} (${age})`;
+            }
+            return 'Format not recognized.';
+        }
+        function supahotDecode(serial) {
+            // First 6 digits: year/month/day
+            let m = serial.match(/(\d{2})(\d{2})(\d{2})/);
+            if (m) {
+                let year = 2000 + parseInt(m[1],10);
+                let month = parseInt(m[2],10);
+                let day = parseInt(m[3],10);
+                return `<b>Date:</b> ${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+            }
+            return 'Format not recognized.';
+        }
+        function durathermDecode(serial) {
+            // Format: YYL nnnnnn-hyphen
+            let m = serial.match(/(\d{2})([A-L])(\d{6})-?(\d{2})?/i);
+            if (m) {
+                let year = 2000 + parseInt(m[1],10);
+                const months = 'ABCDEFGHIJKL';
+                let month = months.indexOf(m[2].toUpperCase())+1;
+                let hyphen = m[4];
+                let warranty = hyphen === '05' ? '5 years' : (hyphen === '10' ? '10 years' : 'Unknown');
+                return `<b>Year:</b> ${year} <b>Month:</b> ${month} <b>Warranty:</b> ${warranty}`;
+            }
+            return 'Format not recognized.';
+        }
+        function gapDecode(serial) {
+            // Format: EE150-16A-12345 (Eco Electric 150L, 16A, Jan 2016)
+            let m = serial.match(/^(EE|EG|ES)(\d+)-(\d{2})([A-Z])-(\d+)/i);
+            if (m) {
+                let type = m[1];
+                let size = m[2];
+                let year = 2000 + parseInt(m[3],10);
+                const months = 'ABCDEFGHIJKL';
+                let month = months.indexOf(m[4].toUpperCase())+1;
+                return `<b>Type:</b> ${type} <b>Size:</b> ${size}L <b>Year:</b> ${year} <b>Month:</b> ${month}`;
+            }
+            return 'Format not recognized.';
+        }
+        function aristonDecode(serial) {
+            // Accept both spaced and unspaced formats
+            let s = serial.replace(/\s+/g, '');
+            // Find product reference (first 7 digits)
+            let productRef = s.slice(0,7);
+            // Find year/day group: first 5 digits after the letter code (e.g., Z2)
+            let afterRef = s.slice(7);
+            let letterCodeMatch = afterRef.match(/[A-Z]\d/);
+            let yearDay = '';
+            if (letterCodeMatch) {
+                let idx = afterRef.indexOf(letterCodeMatch[0]) + letterCodeMatch[0].length;
+                yearDay = afterRef.slice(idx, idx+5);
+            } else {
+                // fallback: first 5 digits after productRef
+                yearDay = afterRef.match(/(\d{5})/) ? afterRef.match(/(\d{5})/)[1] : '';
+            }
+            // Find random number (last 7 digits)
+            let randNumMatch = s.match(/(\d{7})$/);
+            let randNum = randNumMatch ? randNumMatch[1] : '';
+            if (!productRef || !yearDay) return 'Serial format not recognized.';
+            let year = 2000 + parseInt(yearDay.slice(0,2), 10);
+            let dayOfYear = parseInt(yearDay.slice(2,5), 10);
+            let date = new Date(year, 0);
+            date.setDate(dayOfYear);
+            let dateStr = date.toISOString().slice(0,10);
+            let age = calculateAge(year, date.getMonth()+1);
+            return `<b>Product Reference:</b> ${productRef}<br><b>Manufacture Date:</b> ${dateStr}<br><b>Year:</b> ${year}<br><b>Day of Year:</b> ${dayOfYear}<br><b>Age:</b> ${age} year${age === 1 ? '' : 's'} (${age})<br><b>Random Number:</b> ${randNum}`;
+        }
+        document.getElementById('decoderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const brand = document.getElementById('brand').value;
+            const serial = document.getElementById('serial').value.trim();
+            let result = '';
+            if (!serial) {
+                result = '<span style="color:red">Please enter a serial/code.</span>';
+                document.getElementById('result').innerHTML = result;
+                return;
+            }
+            if (brand === 'kwikot') {
+                result = kwikotDecode(serial);
+            } else if (brand === 'tecron') {
+                result = tecronDecode(serial);
+            } else if (brand === 'supahot') {
+                result = supahotDecode(serial);
+            } else if (brand === 'duratherm') {
+                result = durathermDecode(serial);
+            } else if (brand === 'gap') {
+                result = gapDecode(serial);
+            } else if (brand === 'ariston') {
+                result = aristonDecode(serial);
+            } else {
+                result = 'Brand not supported.';
+            }
+            document.getElementById('result').innerHTML = result;
+        });
+        document.getElementById('serial').addEventListener('input', function(e) {
+            const brand = document.getElementById('brand').value;
+            let val = e.target.value;
+            if (brand === 'kwikot') {
+                let formatted = formatKwikotInput(val);
+                if (formatted !== val) {
+                    e.target.value = formatted;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
